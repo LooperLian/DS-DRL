@@ -119,26 +119,7 @@ def record(global_ep, global_ep_r, ep_r, reward_queue, name, block_rate, block_q
         "Ep:", global_ep.value,
         "Ep_r: %.4f" % global_ep_r.value,
         "BLOCK: %.4f" % block_rate,
-        "block_overtime: %.4f" % output_block_due2_overtime,
 
-        "block_reconfig: %.4f" % output_block_due2_reconfig,
-        "block_memory: %.4f" % output_block_due2_memory,
-        "block_opt: %.4f" % output_block_due2_opt_only,
-        "block_IP: %.4f" % output_block_due2_IP_only,
-        "block_optIP: %.4f" % output_block_due2_optIP,
-
-        "DELAY: %.4f" % output_delay,
-        "DELAY_reconfig: %.4f" % output_delay_due2_reconfig,
-        "DELAY_forward: %.4f" % output_delay_forward,
-        "DELAY_propagation: %.4f" % output_delay_propagation,
-        "DELAY_process: %.4f" % output_delay_process,
-        "OPT_util: %.4f" % output_opt_util,
-        "IP_util: %.4f" % output_ip_util,
-        "MEMORY_util: %.4f" % output_memory_util,
-
-        "OPTICAL_RECONFIG: %.4f" % optical_reconfig_times,
-        "IP_RECONFIG: %.4f" % ip_reconfig_times,
-        "COMPUT_RECONFIG: %.4f" % comput_reconfig_times,
 
 
 
