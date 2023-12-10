@@ -46,26 +46,7 @@ def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     lnet.load_state_dict(gnet.state_dict())
 
 
-def record(global_ep, global_ep_r, ep_r, reward_queue, name, block_rate, block_queue,
-           output_block, output_block_queue,
-           output_block_due2_overtime, output_block_due2_overtime_queue,
-           output_block_due2_reconfig, output_block_due2_reconfig_queue,
-           output_block_due2_memory, output_block_due2_memory_queue,
-           output_block_due2_opt_only, output_block_due2_opt_only_queue,
-           output_block_due2_IP_only, output_block_due2_IP_only_queue,
-           output_block_due2_optIP, output_block_due2_optIP_queue,
-           output_delay, output_delay_queue,
-           output_delay_due2_reconfig, output_delay_due2_reconfig_queue,
-           output_delay_forward, output_delay_forward_queue,
-           output_delay_propagation, output_delay_propagation_queue,
-           output_delay_process, output_delay_process_queue,
-           output_opt_util, output_opt_util_queue,
-           output_ip_util, output_ip_util_queue,
-           output_memory_util, output_memory_util_queue,
-           optical_reconfig_times, optical_reconfig_times_queue,
-           ip_reconfig_times, ip_reconfig_times_queue,
-           comput_reconfig_times, comput_reconfig_times_queue
-           ):
+def record(global_ep, global_ep_r, ep_r, reward_queue, name, block_rate, block_queue):
     with global_ep.get_lock():
         global_ep.value += 1
     with global_ep_r.get_lock():
@@ -74,48 +55,11 @@ def record(global_ep, global_ep_r, ep_r, reward_queue, name, block_rate, block_q
         else:
             global_ep_r.value = global_ep_r.value * 0.99 + ep_r * 0.01
     reward_queue.put(global_ep_r.value)
-    """
-    reward_queue.put(global_ep_r.value)
-    block_queue.put(block_rate)
 
-    output_block_queue.put(output_block)
-    output_block_due2_overtime_queue.put(output_block_due2_overtime)
-    output_block_due2_reconfig_queue.put(output_block_due2_reconfig)
-    output_block_due2_memory_queue.put(output_block_due2_memory)
-    output_block_due2_opt_only_queue.put(output_block_due2_opt_only)
-    output_block_due2_IP_only_queue.put(output_block_due2_IP_only)
-    output_block_due2_optIP_queue.put(output_block_due2_optIP)
-    output_delay_queue.put(output_delay)
-    output_delay_due2_reconfig_queue.put(output_delay_due2_reconfig)
-    output_delay_forward_queue.put(output_delay_forward)
-    output_delay_propagation_queue.put(output_delay_propagation)
-    output_delay_process_queue.put(output_delay_process)
-    output_opt_util_queue.put(output_opt_util)
-    output_ip_util_queue.put(output_ip_util)
-    output_memory_util_queue.put(output_memory_util)
-    optical_reconfig_times_queue.put(optical_reconfig_times)
-    ip_reconfig_times_queue.put(ip_reconfig_times)
-    comput_reconfig_times_queue.put(comput_reconfig_times)
-    """
 
 
     print(
         name,
-        # "Ep:", global_ep.value,
-        # "| Ep_r: %.4f" % global_ep_r.value,
-        # "| BLOCK RATE: %.4f" % block_rate,
-        # "| output_block_due2_overtime: %.4f" % output_block_due2_overtime,
-        #
-        # "| output_block_due2_reconfig: %.4f" % output_block_due2_reconfig,
-        # "| output_block_due2_memory: %.4f" % output_block_due2_memory,
-        # "| output_block_due2_opt_only: %.4f" % output_block_due2_opt_only,
-        # "| output_block_due2_IP_only: %.4f" % output_block_due2_IP_only,
-        # "| output_block_due2_optIP: %.4f" % output_block_due2_optIP,
-        #
-        # "| OPTICAL RECONFIG TIMES: %.4f" % optical_reconfig_times,
-        # "| IP RECONFIG TIMES: %.4f" % ip_reconfig_times,
-        # "| COMPUT RECONFIG TIMES: %.4f" % comput_reconfig_times,
-
         "Ep:", global_ep.value,
         "Ep_r: %.4f" % global_ep_r.value,
         "BLOCK: %.4f" % block_rate,
